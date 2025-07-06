@@ -38,7 +38,7 @@ Create a dataset in the following JSONL format (one JSON object per line):
 
 ```json
 {
-  "instruction": "Create a schedule for my day with the following tasks: Team Meeting, Code Review, Lunch Break",
+  "instruction": "Create a schedule for my day with the following tasks: Team Meeting, Code Review, Lunch Break. Here are my existing commitments: [{\"date\":\"2025-07-04\",\"time\":\"11:00 - 12:00\",\"name\":\"Client Call\",\"priority\":\"high\"}]. Please avoid scheduling conflicts.",
   "response": {
     "schedule": [
       {
@@ -51,7 +51,7 @@ Create a dataset in the following JSONL format (one JSON object per line):
       },
       {
         "date": "2025-07-04",
-        "time": "10:30 - 12:00",
+        "time": "10:15 - 10:45",
         "name": "Code Review",
         "priority": "medium",
         "recurrence": "daily",
@@ -59,7 +59,7 @@ Create a dataset in the following JSONL format (one JSON object per line):
       },
       {
         "date": "2025-07-04",
-        "time": "12:00 - 12:30",
+        "time": "12:15 - 12:45",
         "name": "Lunch Break",
         "priority": "low",
         "recurrence": "daily",
