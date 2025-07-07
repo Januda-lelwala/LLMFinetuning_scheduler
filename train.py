@@ -94,19 +94,27 @@ def train():
     # Prepare PEFT model
     model = create_peft_model(model)
     
-    # Load and prepare dataset
-    dataset = load_dataset(DATASET_NAME, split="train")
+    # Load dataset from local JSONL file
+    dataset = load_dataset('json', data_files='dataset.jasonl', split='train')
     
     # Format the dataset for instruction fine-tuning
     def format_instruction(example):
-        # Format the instruction and response as a JSON string
+        # Get the instruction, input, and output from the example
         instruction = example['instruction']
-        response = example['response']
+        input_text = example.get('input', '')  # Handle cases where input might be empty
+        output = example['output']
         
-        # Create a structured prompt
-        text = f"""### Instruction: {instruction}
+        # Create a structured prompt with both instruction and input if available
+        if input_text:
+            text = f"""### Instruction: {instruction}
+### Input:
+{input_text}
 ### Response:
-{response}"""
+{output}"""
+        else:
+            text = f"""### Instruction: {instruction}
+### Response:
+{output}"""
         
         return {"text": text}
     
